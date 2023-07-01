@@ -17,7 +17,6 @@ async function fetchVideos(string){
 
 function onClickSearch(){
     const searchString=input.value;
-    console.log(searchString);
    container.innerHTML=``;
    fetchVideos(searchString);
 }
@@ -31,7 +30,7 @@ async function fetchVideoDetails(videoId){
     return result.items[0];
 }
 
-/*fetchVideoDetails("-HhnNXukOiQ");*/
+fetchVideoDetails("-HhnNXukOiQ");
 
 
 async function getVideosData(videoArray){
@@ -40,18 +39,17 @@ async function getVideosData(videoArray){
         const videoId=videoArray[i].id.videoId;
         videoDetailsArray.push(await fetchVideoDetails(videoId));
     }
+    console.log(videoDetailsArray);
     renderVideo(videoDetailsArray);
-
 }
 
 function renderVideo(videoDataArray){
     for(let i=0;i<videoDataArray.length;i++){
         const a=document.createElement("a");
         a.className="video-content";
-        a.href="#"
-        let publishedTime=videoDataArray[i].snippet.publishedAt;
-        let customDate=new Date(`${publishedTime.substring(0,4)}`,`${publishedTime.substring(5,7)}`,`${publishedTime.substring(8,10)}`,`${publishedTime.substring(11,13)}`,`${publishedTime.substring(14,16)}`,`${publishedTime.substring(17,19)}`);
-        
+        a.href="about-details.html"
+        let videoId=videoDataArray[i].id;
+        document.cookie = `videoId=${videoId};  path=/about-details.html`; 
         a.innerHTML=`
             <div class="thumbnail">
                 <img src="${videoDataArray[i].snippet.thumbnails.high.url}">

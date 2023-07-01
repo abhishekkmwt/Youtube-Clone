@@ -16,6 +16,7 @@
   height: 56px;
   column-gap: 5%;
   position: fixed;
+  top: 0;
   width: 100%;
   z-index: 1000;
   background-color: white;
