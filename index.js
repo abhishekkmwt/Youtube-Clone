@@ -1,5 +1,5 @@
 const Base_URL="https://www.googleapis.com/youtube/v3";
-const API_KEY="AIzaSyAVZsjcpWbllma0i5xG5aXOblM_TrK3Ml4";
+const API_KEY="AIzaSyAzgxGOnP6UZz0F-gjmZ7ouSZA3M1k2un4";
 
 const container =document.getElementsByClassName("main-video-container")[0];
 const input =document.getElementsByTagName("input")[0];
@@ -47,9 +47,10 @@ function renderVideo(videoDataArray){
     for(let i=0;i<videoDataArray.length;i++){
         const a=document.createElement("a");
         a.className="video-content";
-        a.href="about-details.html"
+        a.href="about-details.html";
         let videoId=videoDataArray[i].id;
-        document.cookie = `videoId=${videoId};  path=/about-details.html`; 
+        
+        
         a.innerHTML=`
             <div class="thumbnail">
                 <img src="${videoDataArray[i].snippet.thumbnails.high.url}">
@@ -72,6 +73,11 @@ function renderVideo(videoDataArray){
                     </div>
                 </div>
             </div>`
+
+            a.addEventListener("click",function(){
+                sessionStorage.setItem("videoId",`${videoId}`);
+            window.location.href="about-details.html"
+            });
             container.appendChild(a);
     }
 }
